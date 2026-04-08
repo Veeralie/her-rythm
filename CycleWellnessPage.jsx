@@ -257,6 +257,10 @@ function dateKey(date) {
   return `${year}-${month}-${day}`;
 }
 
+function isSameDate(a, b) {
+  return dateKey(a) === dateKey(b);
+}
+
 function addDays(date, days) {
   const d = new Date(date);
   d.setDate(d.getDate() + days);
