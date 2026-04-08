@@ -648,50 +648,66 @@ export default function CycleWellnessPage() {
       <div className="mx-auto max-w-6xl px-4 py-6">
         <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#34243a] via-[#241d30] to-[#1a1824] p-5 shadow-2xl">
 
-          <div className="mt-5 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-            <div>
-              <p className="text-sm uppercase tracking-[0.24em] text-white/55">Did your period start?</p>
-              <div className="mt-3 flex flex-wrap gap-3">
-                <button onClick={() => markPeriodStart(today)} className="rounded-full bg-[#d3ae91] px-5 py-3 text-sm font-semibold text-[#2b1e1b] shadow-lg shadow-[#d3ae91]/20 transition hover:scale-[1.01]">Today</button>
-                <input type="date" value={dateKey(yesterday)} onChange={(e) => e.target.value && markPeriodStart(e.target.value)} className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-white/85 outline-none" />
-              </div>
+          <div className="mt-5">
+            <p className="text-sm uppercase tracking-[0.24em] text-white/55">
+              Did your period start?
+            </p>
 
-              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/45">Cycle day</p>
-                  <p className="mt-2 text-4xl font-bold">Day {currentCycleDay}</p>
-                </div>
-                <div className={`rounded-3xl bg-gradient-to-br p-4 ring-1 ring-white/10 ${currentPhase.accent}`}>
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/45">Auto-detected cycle phase</p>
-                  <p className="mt-2 text-2xl font-bold">{currentPhase.emoji} {currentPhaseName}</p>
-                </div>
-              </div>
-
-              <div className="mt-4 rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/45">Recommended focus</p>
-                <p className="mt-2 text-base text-white/80">{currentPhase.focus}</p>
-                <p className="mt-3 text-sm text-white/45">Personalized after {remainingCycles} more logged cycle{remainingCycles === 1 ? "" : "s"}.</p>
-              </div>
-            </div>
-
-            <div className="rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
+            <div className="mt-4 rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
               <h2 className="text-xl font-bold">Cycle calendar</h2>
+          
               <div className="mt-3 flex items-center justify-between gap-2">
-                <button onClick={() => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1))} className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm">←</button>
-                <div className="rounded-2xl bg-white/5 px-4 py-2 text-base font-semibold">{monthLabel(viewDate)}</div>
-                <button onClick={() => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1))} className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm">→</button>
+                <button
+                  onClick={() =>
+                    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1))
+                  }
+                  className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm"
+                >
+                  ←
+                </button>
+  
+                <div className="rounded-2xl bg-white/5 px-4 py-2 text-base font-semibold">
+                  {monthLabel(viewDate)}
+                </div>
+          
+                <button
+                  onClick={() =>
+                    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1))
+                  }
+                  className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm"
+                >
+                  →
+                </button>
               </div>
+
               <div className="mt-4 grid grid-cols-7 gap-2 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/40">
-                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => <div key={day}>{day}</div>)}
+                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+                  <div key={day}>{day}</div>
+                ))}
               </div>
+          
               <div className="mt-3 grid grid-cols-7 gap-2">
                 {calendarDays.map((item, index) => {
-                  const base = item.muted ? "bg-white/[0.03] text-white/35" : phaseClasses[item.phase] || "bg-white/[0.03] text-white";
-                  const fertile = item.fertile ? "shadow-[0_0_0_1px_rgba(255,209,102,0.45)]" : "";
-                  const ovulation = item.ovulation ? "after:absolute after:bottom-1 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full after:bg-white" : "";
-                  const selected = hasUserSelectedDate && dateKey(item.date) === dateKey(selectedDate) ? "ring-2 ring-[#d3ae91] shadow-lg shadow-[#d3ae91]/20" : "ring-1 ring-white/5";
+                  const base = item.muted
+                    ? "bg-white/[0.03] text-white/35"
+                    : phaseClasses[item.phase] || "bg-white/[0.03] text-white";
+                  const fertile = item.fertile
+                    ? "shadow-[0_0_0_1px_rgba(255,209,102,0.45)]"
+                    : "";
+                  const ovulation = item.ovulation
+                    ? "after:absolute after:bottom-1 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full after:bg-white"
+                    : "";
+                  const selected =
+                    hasUserSelectedDate && dateKey(item.date) === dateKey(selectedDate)
+                      ? "ring-2 ring-[#d3ae91] shadow-lg shadow-[#d3ae91]/20"
+                      : "ring-1 ring-white/5";
+          
                   return (
-                    <button key={`${item.day}-${index}`} onClick={() => openSelectedDate(item.date)} className={`relative h-10 rounded-xl text-sm font-semibold transition hover:scale-[1.02] ${base} ${fertile} ${ovulation} ${selected}`}>
+                    <button
+                      key={`${item.day}-${index}`}
+                      onClick={() => openSelectedDate(item.date)}
+                      className={`relative h-10 rounded-xl text-sm font-semibold transition hover:scale-[1.02] ${base} ${fertile} ${ovulation} ${selected}`}
+                    >
                       {item.day}
                     </button>
                   );
@@ -699,7 +715,6 @@ export default function CycleWellnessPage() {
               </div>
             </div>
           </div>
-        </div>
 
         {hasUserSelectedDate && (
           <section className="mt-5 rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-xl">
