@@ -525,10 +525,27 @@ const lastPeriodDateObj = new Date(year, month - 1, day);
   }, [selectedLog.height, selectedLog.weight]);
 
   function updateLogForDate(key, updater) {
-    setLogs((prev) => {
-      const current = prev[key] || emptyLog();
-      return { ...prev, [key]: updater(current) };
-    });
+  setLogs((prev) => {
+    const current = prev[key] || emptyLog();
+
+    const next = {
+      ...prev,
+      [key]: updater(current),
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      lastPeriodStart,
+      cycleLength,
+      periodLength,
+      viewDate: dateKey(viewDate),
+      selectedDate: dateKey(selectedDate),
+      hasUserSelectedDate,
+      logs: next,
+      tab,
+    }));
+
+    return next;
+  });
   }
 
   function toggleItem(section, item) {
