@@ -399,8 +399,14 @@ export default function CycleWellnessPage() {
         if (parsed.lastPeriodStart) setLastPeriodStart(parsed.lastPeriodStart);
         if (parsed.cycleLength) setCycleLength(parsed.cycleLength);
         if (parsed.periodLength) setPeriodLength(parsed.periodLength);
-        if (parsed.viewDate) setViewDate(startOfDay(parsed.viewDate));
-        if (parsed.selectedDate) setSelectedDate(startOfDay(parsed.selectedDate));
+        if (parsed.viewDate) {
+  const [y, m, d] = parsed.viewDate.split("-").map(Number);
+  setViewDate(new Date(y, m - 1, d));
+}
+        if (parsed.selectedDate) {
+  const [y, m, d] = parsed.selectedDate.split("-").map(Number);
+  setSelectedDate(new Date(y, m - 1, d));
+}
         if (parsed.logs) setLogs(parsed.logs);
         if (typeof parsed.hasUserSelectedDate === "boolean") setHasUserSelectedDate(parsed.hasUserSelectedDate);
         if (parsed.tab) setTab(parsed.tab);
