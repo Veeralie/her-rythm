@@ -647,9 +647,6 @@ export default function CycleWellnessPage() {
     <main className="min-h-screen bg-[#131217] text-white">
       <div className="mx-auto max-w-6xl px-4 py-6">
         <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#34243a] via-[#241d30] to-[#1a1824] p-5 shadow-2xl">
-          <div className={`inline-flex rounded-full px-4 py-2 text-sm font-medium backdrop-blur ${currentPhase.badge}`}>
-            {currentPhase.title}
-          </div>
 
           <div className="mt-5 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
