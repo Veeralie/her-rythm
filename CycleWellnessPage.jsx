@@ -643,24 +643,6 @@ export default function CycleWellnessPage() {
             {currentPhase.title}
           </div>
 
-              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/45">Cycle day</p>
-                  <p className="mt-2 text-4xl font-bold">Day {currentCycleDay}</p>
-                </div>
-                <div className={`rounded-3xl bg-gradient-to-br p-4 ring-1 ring-white/10 ${currentPhase.accent}`}>
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/45">Auto-detected cycle phase</p>
-                  <p className="mt-2 text-2xl font-bold">{currentPhase.emoji} {currentPhaseName}</p>
-                </div>
-              </div>
-
-              <div className="mt-4 rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/45">Recommended focus</p>
-                <p className="mt-2 text-base text-white/80">{currentPhase.focus}</p>
-                <p className="mt-3 text-sm text-white/45">Personalized after {remainingCycles} more logged cycle{remainingCycles === 1 ? "" : "s"}.</p>
-              </div>
-            </div>
-
             <div className="rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
               <h2 className="text-xl font-bold">Cycle calendar</h2>
               <div className="mt-3 flex items-center justify-between gap-2">
