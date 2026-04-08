@@ -710,12 +710,12 @@ export default function CycleWellnessPage() {
                     Edit as period end
                   </button>
                 </div>
-              
-              </div> {/* ✅ THIS WAS MISSING */}
+              </div> 
               
               <p className="mt-3 text-sm text-white/55">
                 Editing period timing here will affect future predictions.
               </p>
+            </section>
         )}
         
         <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
