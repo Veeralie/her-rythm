@@ -696,7 +696,33 @@ export default function CycleWellnessPage() {
             <p className="mt-3 text-sm text-white/55">Editing period timing here will affect future predictions.</p>
           </section>
         )}
+        
+        <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+          <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+            <p className="text-xs uppercase tracking-[0.2em] text-white/45">Cycle day</p>
+            <p className="mt-2 text-3xl font-bold sm:text-4xl">Day {currentCycleDay}</p>
+          </div>
 
+          <div className={`rounded-3xl bg-gradient-to-br p-4 ring-1 ring-white/10 ${currentPhase.accent}`}>
+            <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+              Auto-detected cycle phase
+            </p>
+            <p className="mt-2 text-xl font-bold sm:text-2xl">
+              {currentPhase.emoji} {currentPhaseName}
+            </p>
+          </div>
+
+          <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10 md:col-span-2 xl:col-span-1">
+            <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+              Recommended focus
+            </p>
+            <p className="mt-2 text-base text-white/80">{currentPhase.focus}</p>
+            <p className="mt-3 text-sm text-white/45">
+              Personalized after {remainingCycles} more logged cycle{remainingCycles === 1 ? "" : "s"}.
+            </p>
+          </div>
+        </div>
+        
         <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-7">
           {TABS.map((item) => (
             <button key={item} onClick={() => setTab(item)} className={`rounded-2xl border px-4 py-3 text-sm font-medium transition ${tab === item ? "border-[#d3ae91]/40 bg-[#d3ae91]/12 text-white" : "border-white/10 bg-white/5 text-white/80 hover:bg-white/10"}`}>
