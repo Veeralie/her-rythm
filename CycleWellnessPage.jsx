@@ -671,6 +671,7 @@ export default function CycleWellnessPage() {
                 })}
               </div>
             </div>
+           </div>
 
         {hasUserSelectedDate && (
           <section className="mt-5 rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-xl">
