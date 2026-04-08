@@ -688,6 +688,7 @@ export default function CycleWellnessPage() {
                 <p className="text-sm text-white/55">Selected date</p>
                 <h3 className="mt-1 text-2xl font-bold">{formatLong(selectedDate)}</h3>
               </div>
+              
               <div className="flex w-full flex-col gap-2 sm:flex-row">
                 <button
                   onClick={() => markPeriodStart(selectedDate)}
@@ -703,6 +704,7 @@ export default function CycleWellnessPage() {
                   Edit as period end
                 </button>
               </div>
+              
             <p className="mt-3 text-sm text-white/55">Editing period timing here will affect future predictions.</p>
           </section>
         )}
