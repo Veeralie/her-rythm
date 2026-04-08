@@ -544,13 +544,6 @@ const lastPeriodDateObj = new Date(year, month - 1, day);
   }
 
   function markPeriodStart(date) {
-    const key = dateKey(date);
-    setLastPeriodStart(key);
-    updateLogForDate(key, (current) => ({ ...current, periodStart: true, periodEnd: false }));
-  }
-
-  function markPeriodEnd(date) {
-  function markPeriodStart(date) {
   const localDate = new Date(
     date.getFullYear(),
     date.getMonth(),
