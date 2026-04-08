@@ -689,24 +689,33 @@ export default function CycleWellnessPage() {
                 <h3 className="mt-1 text-2xl font-bold">{formatLong(selectedDate)}</h3>
               </div>
               
-              <div className="flex w-full flex-col gap-2 sm:flex-row">
-                <button
-                  onClick={() => markPeriodStart(selectedDate)}
-                  className="w-full sm:flex-1 rounded-full bg-[#d3ae91] px-4 py-3 text-sm font-semibold text-[#2b1e1b]"
-                >
-                  Edit as period start
-                </button>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="text-sm text-white/55">Selected date</p>
+                  <h3 className="mt-1 text-2xl font-bold">{formatLong(selectedDate)}</h3>
+                </div>
               
-                <button
-                  onClick={() => markPeriodEnd(selectedDate)}
-                  className="w-full sm:flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/85"
-                >
-                  Edit as period end
-                </button>
-              </div>
+                <div className="flex w-full flex-col gap-2 sm:flex-row">
+                  <button
+                    onClick={() => markPeriodStart(selectedDate)}
+                    className="w-full sm:flex-1 rounded-full bg-[#d3ae91] px-4 py-3 text-sm font-semibold text-[#2b1e1b]"
+                  >
+                    Edit as period start
+                  </button>
               
-            <p className="mt-3 text-sm text-white/55">Editing period timing here will affect future predictions.</p>
-          </section>
+                  <button
+                    onClick={() => markPeriodEnd(selectedDate)}
+                    className="w-full sm:flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/85"
+                  >
+                    Edit as period end
+                  </button>
+                </div>
+              
+              </div> {/* ✅ THIS WAS MISSING */}
+              
+              <p className="mt-3 text-sm text-white/55">
+                Editing period timing here will affect future predictions.
+              </p>
         )}
         
         <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
