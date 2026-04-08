@@ -932,16 +932,16 @@ function markPeriodEnd(date) {
               </div>
               <div className="mt-4 rounded-3xl border border-white/10 bg-white/5 p-4">
                 <div className="inline-flex rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-emerald-100">Free featured view</div>
-                <h3 className="mt-3 text-xl font-semibold">{currentPhase.fitness.featured}</h3>
-                <p className="mt-2 text-sm text-white/70">Goal: {currentPhase.fitness.goal}</p>
-                <p className="mt-1 text-sm text-white/70">Exercise: {currentPhase.fitness.exercise}</p>
-                <p className="mt-1 text-sm text-white/70">Duration: {currentPhase.fitness.duration}</p>
-                <p className="mt-1 text-sm text-white/70">Estimated burned calories: {currentPhase.fitness.calories}</p>
+                <h3 className="mt-3 text-xl font-semibold">{phaseMeta[selectedPhaseName].fitness.featured}</h3>
+                <p className="mt-2 text-sm text-white/70">Goal: {phaseMeta[selectedPhaseName].fitness.goal}</p>
+                <p className="mt-1 text-sm text-white/70">Exercise: {phaseMeta[selectedPhaseName].fitness.exercise}</p>
+                <p className="mt-1 text-sm text-white/70">Duration: {phaseMeta[selectedPhaseName].fitness.duration}</p>
+                <p className="mt-1 text-sm text-white/70">Estimated burned calories: {phaseMeta[selectedPhaseName].fitness.calories}</p>
                 <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                  <LinkButton href={currentPhase.fitness.watch} label="Watch workout / tutorial" />
-                  <LinkButton href={currentPhase.fitness.program} label="Join program / challenge" />
-                  <LinkButton href={currentPhase.fitness.coach} label="Train with coach" />
-                  <LinkButton href={currentPhase.fitness.shop} label="Shop equipment" />
+                  <LinkButton href={phaseMeta[selectedPhaseName].fitness.watch} label="Watch workout / tutorial" />
+                  <LinkButton href={phaseMeta[selectedPhaseName].fitness.program} label="Join program / challenge" />
+                  <LinkButton href={phaseMeta[selectedPhaseName].fitness.coach} label="Train with coach" />
+                  <LinkButton href={phaseMeta[selectedPhaseName].fitness.shop} label="Shop equipment" />
                 </div>
                 <button onClick={() => setShowPremiumModal(true)} className="mt-4 w-full rounded-2xl bg-[#d3ae91] px-4 py-3 text-sm font-semibold text-[#2b1e1b]">Premium fitness plan</button>
               </div>
@@ -1000,11 +1000,11 @@ function markPeriodEnd(date) {
               </div>
               <div className="mt-4 rounded-3xl border border-white/10 bg-white/5 p-4">
                 <div className="inline-flex rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-emerald-100">Free featured view</div>
-                <h3 className="mt-3 text-xl font-semibold">{currentPhase.health.featured}</h3>
-                <p className="mt-2 text-sm text-white/70">Why it matters: {currentPhase.health.why}</p>
-                <p className="mt-2 text-sm text-white/70">Recommended support: {currentPhase.health.text}</p>
+                <h3 className="mt-3 text-xl font-semibold">{phaseMeta[selectedPhaseName].health.featured}</h3>
+                <p className="mt-2 text-sm text-white/70">Why it matters: {phaseMeta[selectedPhaseName].health.why}</p>
+                <p className="mt-2 text-sm text-white/70">Recommended support: {phaseMeta[selectedPhaseName].health.text}</p>
                 <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                  <LinkButton href={currentPhase.health.shop} label="Shop now" />
+                  <LinkButton href={phaseMeta[selectedPhaseName].health.shop} label="Shop now" />
                   <button onClick={() => setShowPremiumModal(true)} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">Premium health guide</button>
                 </div>
               </div>
@@ -1013,14 +1013,14 @@ function markPeriodEnd(date) {
             <Card>
               <h2 className="text-2xl font-bold">Health summary</h2>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <InfoPill label="Current phase" value={currentPhaseName} />
-                <InfoPill label="Why it matters" value={currentPhase.health.why} />
-                <InfoPill label="Featured support" value={currentPhase.health.featured} />
-                <InfoPill label="Premium layer" value={currentPhase.health.premium} />
+                <InfoPill label="Current phase" value={selectedPhaseName} />
+                <InfoPill label="Why it matters" value={phaseMeta[selectedPhaseName].health.why} />
+                <InfoPill label="Featured support" value={phaseMeta[selectedPhaseName].health.featured} />
+                <InfoPill label="Premium layer" value={phaseMeta[selectedPhaseName].health.premium} />
               </div>
             </Card>
           </section>
-        )}
+        )}§1
 
         {tab === "Nutrition" && (
           <section className="mt-5 grid gap-5 lg:grid-cols-2">
@@ -1034,12 +1034,12 @@ function markPeriodEnd(date) {
               </div>
               <div className="mt-4 rounded-3xl border border-white/10 bg-white/5 p-4">
                 <div className="inline-flex rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-emerald-100">Free featured view</div>
-                <h3 className="mt-3 text-xl font-semibold">{currentPhase.nutrition.featured}</h3>
-                <p className="mt-2 text-sm text-white/70">Suggested food direction: {currentPhase.nutrition.text}</p>
+                <h3 className="mt-3 text-xl font-semibold">{phaseMeta[selectedPhaseName].nutrition.featured}</h3>
+                <p className="mt-2 text-sm text-white/70">Suggested food direction: {phaseMeta[selectedPhaseName].nutrition.text}</p>
                 <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                  <LinkButton href={currentPhase.nutrition.watch} label="Watch cooking" />
-                  <LinkButton href={currentPhase.nutrition.menu} label="Get menu / recipe / craving control plan" />
-                  <LinkButton href={currentPhase.nutrition.shop} label="Shop ingredients" />
+                  <LinkButton href={phaseMeta[selectedPhaseName].nutrition.watch} label="Watch cooking" />
+                  <LinkButton href={phaseMeta[selectedPhaseName].nutrition.menu} label="Get menu / recipe / craving control plan" />
+                  <LinkButton href={phaseMeta[selectedPhaseName].nutrition.shop} label="Shop ingredients" />
                   <button onClick={() => setShowPremiumModal(true)} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">Premium nutrition plan</button>
                 </div>
               </div>
@@ -1048,10 +1048,10 @@ function markPeriodEnd(date) {
             <Card>
               <h2 className="text-2xl font-bold">Cycle meal planning</h2>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <InfoPill label="Current phase" value={currentPhaseName} />
-                <InfoPill label="Recommended focus" value={currentPhase.focus} />
-                <InfoPill label="Featured meals" value={currentPhase.nutrition.featured} />
-                <InfoPill label="Premium layer" value={currentPhase.nutrition.premium} />
+                <InfoPill label="Current phase" value={selectedPhaseName} />
+                <InfoPill label="Recommended focus" value={phaseMeta[selectedPhaseName].focus} />
+                <InfoPill label="Featured meals" value={phaseMeta[selectedPhaseName].nutrition.featured} />
+                <InfoPill label="Premium layer" value={phaseMeta[selectedPhaseName].nutrition.premium} />
               </div>
             </Card>
           </section>
