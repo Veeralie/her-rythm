@@ -717,18 +717,33 @@ export default function CycleWellnessPage() {
           </div>
 
         {hasUserSelectedDate && (
-          <section className="mt-5 rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-xl">
-            <div className="flex flex-wrap items-start justify-between gap-3">
+          <section className="mt-5 rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-4 shadow-xl">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <p className="text-sm text-white/55">Selected date</p>
-                <h3 className="mt-1 text-2xl font-bold">{formatLong(selectedDate)}</h3>
+                <h3 className="mt-1 text-xl font-bold sm:text-2xl">{formatLong(selectedDate)}</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={() => markPeriodStart(selectedDate)} className="rounded-full bg-[#d3ae91] px-4 py-2 text-sm font-semibold text-[#2b1e1b]">Edit as period start</button>
-                <button onClick={() => markPeriodEnd(selectedDate)} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/85">Edit as period end</button>
+          
+              <div className="flex w-full flex-col gap-2 sm:flex-row lg:w-auto">
+                <button
+                  onClick={() => markPeriodStart(selectedDate)}
+                  className="w-full rounded-full bg-[#d3ae91] px-4 py-3 text-sm font-semibold text-[#2b1e1b] sm:w-auto"
+                >
+                  Edit as period start
+                </button>
+          
+                <button
+                  onClick={() => markPeriodEnd(selectedDate)}
+                  className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/85 sm:w-auto"
+                >
+                  Edit as period end
+                </button>
               </div>
             </div>
-            <p className="mt-3 text-sm text-white/55">Editing period timing here will affect future predictions.</p>
+          
+            <p className="mt-3 text-sm text-white/55">
+              Editing period timing here will affect future predictions.
+            </p>
           </section>
         )}
 
