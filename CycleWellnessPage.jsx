@@ -643,13 +643,6 @@ export default function CycleWellnessPage() {
             {currentPhase.title}
           </div>
 
-            <div>
-              <p className="text-sm uppercase tracking-[0.24em] text-white/55">Did your period start?</p>
-              <div className="mt-3 flex flex-wrap gap-3">
-                <button onClick={() => markPeriodStart(today)} className="rounded-full bg-[#d3ae91] px-5 py-3 text-sm font-semibold text-[#2b1e1b] shadow-lg shadow-[#d3ae91]/20 transition hover:scale-[1.01]">Today</button>
-                <input type="date" value={dateKey(yesterday)} onChange={(e) => e.target.value && markPeriodStart(e.target.value)} className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-white/85 outline-none" />
-              </div>
-
               <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
                   <p className="text-xs uppercase tracking-[0.2em] text-white/45">Cycle day</p>
