@@ -442,7 +442,8 @@ export default function CycleWellnessPage() {
     );
   }, [cycleLength, periodLength, goals, onboardingComplete]);
 
-  const lastPeriodDateObj = startOfDay(lastPeriodStart);
+  const [year, month, day] = lastPeriodStart.split("-").map(Number);
+const lastPeriodDateObj = new Date(year, month - 1, day);
   const currentCycleDay = getCycleDay(today, lastPeriodDateObj, cycleLength);
   const ovulationDay = getOvulationDay(cycleLength);
   const currentPhaseName = getPhase(currentCycleDay, periodLength, ovulationDay);
@@ -549,17 +550,38 @@ export default function CycleWellnessPage() {
   }
 
   function markPeriodEnd(date) {
-    const endDate = startOfDay(date);
-    const newPeriodStart = addDays(endDate, -(periodLength - 1));
-    const key = dateKey(endDate);
-  
-    setLastPeriodStart(dateKey(newPeriodStart));
-    updateLogForDate(key, (current) => ({
-      ...current,
-      periodEnd: true,
-      periodStart: false,
-    }));
-  }
+  function markPeriodStart(date) {
+  const localDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+  const key = dateKey(localDate);
+
+  setLastPeriodStart(key);
+  updateLogForDate(key, (current) => ({
+    ...current,
+    periodStart: true,
+    periodEnd: false,
+  }));
+}
+
+function markPeriodEnd(date) {
+  const localDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+  const newPeriodStart = addDays(localDate, -(periodLength - 1));
+  const key = dateKey(localDate);
+
+  setLastPeriodStart(dateKey(newPeriodStart));
+  updateLogForDate(key, (current) => ({
+    ...current,
+    periodEnd: true,
+    periodStart: false,
+  }));
+}
 
   function toggleGoal(goal) {
     setGoals((prev) => (prev.includes(goal) ? prev.filter((item) => item !== goal) : prev.length >= 3 ? prev : [...prev, goal]));
