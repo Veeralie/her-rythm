@@ -741,15 +741,15 @@ function markPeriodEnd(date) {
         <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
             <p className="text-xs uppercase tracking-[0.2em] text-white/45">Cycle day</p>
-            <p className="mt-2 text-3xl font-bold sm:text-4xl">Day {currentCycleDay}</p>
+            <p className="mt-2 text-3xl font-bold sm:text-4xl">Day {selectedCycleDay}</p>
           </div>
 
-          <div className={`rounded-3xl bg-gradient-to-br p-4 ring-1 ring-white/10 ${currentPhase.accent}`}>
+          <div className={`rounded-3xl bg-gradient-to-br p-4 ring-1 ring-white/10 ${phaseMeta[selectedPhaseName].accent}`}>
             <p className="text-xs uppercase tracking-[0.2em] text-white/45">
               Auto-detected cycle phase
             </p>
             <p className="mt-2 text-xl font-bold sm:text-2xl">
-              {currentPhase.emoji} {currentPhaseName}
+              {phaseMeta[selectedPhaseName].emoji} {selectedPhaseName}
             </p>
           </div>
 
@@ -757,7 +757,7 @@ function markPeriodEnd(date) {
             <p className="text-xs uppercase tracking-[0.2em] text-white/45">
               Recommended focus
             </p>
-            <p className="mt-2 text-base text-white/80">{currentPhase.focus}</p>
+            <p className="mt-2 text-base text-white/80">{phaseMeta[selectedPhaseName].focus}</p>
             <p className="mt-3 text-sm text-white/45">
               Personalized after {remainingCycles} more logged cycle{remainingCycles === 1 ? "" : "s"}.
             </p>
