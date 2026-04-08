@@ -569,15 +569,22 @@ function markPeriodEnd(date) {
     date.getMonth(),
     date.getDate()
   );
-  const newPeriodStart = addDays(localDate, -(periodLength - 1));
+
+  const [year, month, day] = lastPeriodStart.split("-").map(Number);
+  const startDate = new Date(year, month - 1, day);
+
+  const actualPeriodLength = diffDays(localDate, startDate) + 1;
+
   const key = dateKey(localDate);
 
-  setLastPeriodStart(dateKey(newPeriodStart));
   updateLogForDate(key, (current) => ({
     ...current,
     periodEnd: true,
-    periodStart: false,
   }));
+
+  if (actualPeriodLength >= 1) {
+    setPeriodLength(actualPeriodLength);
+  }
 }
 
   function toggleGoal(goal) {
