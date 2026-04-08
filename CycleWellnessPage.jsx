@@ -549,8 +549,16 @@ export default function CycleWellnessPage() {
   }
 
   function markPeriodEnd(date) {
-    const key = dateKey(date);
-    updateLogForDate(key, (current) => ({ ...current, periodEnd: true }));
+    const endDate = startOfDay(date);
+    const newPeriodStart = addDays(endDate, -(periodLength - 1));
+    const key = dateKey(endDate);
+
+    setLastPeriodStart(dateKey(newPeriodStart));
+    updateLogForDate(key, (current) => ({
+      ...current,
+      periodEnd: true,
+      periodStart: false,
+    }));
   }
 
   function toggleGoal(goal) {
