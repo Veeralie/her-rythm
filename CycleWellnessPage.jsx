@@ -719,14 +719,12 @@ function markPeriodEnd(date) {
                   const base = item.muted ? "bg-white/[0.03] text-white/35" : phaseClasses[item.phase] || "bg-white/[0.03] text-white";
                   const fertile = item.fertile ? "shadow-[0_0_0_1px_rgba(255,209,102,0.45)]" : "";
                   const ovulation = item.ovulation ? "after:absolute after:bottom-1 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full after:bg-white" : "";
-                  const selected = hasUserSelectedDate && ...
-
-const today = isSameDate(item.date, new Date());
-
-const todayMarker = today
-  ? "after:absolute after:bottom-1.5 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full after:bg-white/90"
-  : "";
-
+                  const selected = hasUserSelectedDate && dateKey(item.date) === dateKey(selectedDate) ? "ring-2 ring-[#d3ae91] shadow-lg shadow-[#d3ae91]/20" : "ring-1 ring-white/5";
+                  const today = isSameDate(item.date, new Date());
+                  const todayMarker = today
+                    ? "after:absolute after:bottom-1.5 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full after:bg-white/90"
+                    : "";
+                  
                   return (
                     <button
                       key={`${item.day}-${index}`}
