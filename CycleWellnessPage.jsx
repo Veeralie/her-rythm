@@ -688,10 +688,15 @@ export default function CycleWellnessPage() {
                 <p className="text-sm text-white/55">Selected date</p>
                 <h3 className="mt-1 text-2xl font-bold">{formatLong(selectedDate)}</h3>
               </div>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={() => markPeriodStart(selectedDate)} className="rounded-full bg-[#d3ae91] px-4 py-2 text-sm font-semibold text-[#2b1e1b]">Edit as period start</button>
-                <button onClick={() => markPeriodEnd(selectedDate)} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/85">Edit as period end</button>
-              </div>
+              <div className="flex w-full flex-col gap-2 sm:flex-row">
+                <button
+                  onClick={() => markPeriodStart(selectedDate)}
+                  className="w-full sm:flex-1 rounded-full bg-[#d3ae91] px-4 py-3 text-sm font-semibold text-[#2b1e1b]"
+                >
+                <button
+                  onClick={() => markPeriodEnd(selectedDate)}
+                  className="w-full sm:flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/85"
+                >
             </div>
             <p className="mt-3 text-sm text-white/55">Editing period timing here will affect future predictions.</p>
           </section>
