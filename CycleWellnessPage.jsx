@@ -643,7 +643,6 @@ export default function CycleWellnessPage() {
             {currentPhase.title}
           </div>
 
-          <div className="mt-5 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
               <p className="text-sm uppercase tracking-[0.24em] text-white/55">Did your period start?</p>
               <div className="mt-3 flex flex-wrap gap-3">
