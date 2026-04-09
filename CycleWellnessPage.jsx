@@ -940,84 +940,106 @@ function markPeriodEnd(date) {
         )}
 
         {tab === "Stats" && (
-          <section className="mt-5 grid gap-5 lg:grid-cols-2">
-            <Card>
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <h2 className="text-2xl font-bold">Stats</h2>
-                  <p className="mt-1 text-sm text-white/55">Auto-detected from cycle insight data, symptoms, activities, and saved logs.</p>
-                </div>
-                <button className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">Stats</button>
-              </div>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <InfoPill label="Day of cycle" value={`Day ${statsData.dayOfCycle}`} />
-                <InfoPill label="Fertility" value={statsData.fertility} />
-                <InfoPill label="Ovulation" value={statsData.ovulation} />
-                <InfoPill label="Pregnancy chance" value={statsData.pregnancyChance} />
-                <InfoPill label="Predicted from selected symptoms" value={statsData.inferredPhase} />
-                <InfoPill label="Confidence" value={statsData.confidence} />
-              </div>
-              <div className="mt-4 grid gap-2 sm:grid-cols-5">
-                {Object.entries(statsData.scores).map(([key, value]) => (
-                  <div key={key} className="rounded-2xl border border-white/10 bg-white/5 p-3 text-center">
-                    <div className="text-xs uppercase tracking-[0.14em] text-white/45">{key}</div>
-                    <div className="mt-2 text-xl font-semibold">{value}</div>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-4 text-sm text-white/65">This estimate uses a safe rule-based symptom scoring model layered on top of your cycle calendar, activities and symptoms, and saved logs.</p>
-            </Card>
+          <section className="mt-5 grid gap-5">
+  <Card>
+    <div className="flex items-center justify-between gap-3">
+      <div>
+        <h2 className="text-2xl font-bold">Stats</h2>
+        <p className="mt-1 text-sm text-white/55">
+          Personalized cycle insights based on your calendar, symptoms, and saved logs.
+        </p>
+      </div>
 
-            <Card>
-              <h2 className="text-2xl font-bold">Phase score snapshot</h2>
-              <div className="mt-4 grid gap-4">
-                {Object.entries(statsData.scores).map(([key, value]) => (
-                  <div key={key}>
-                    <div className="mb-2 flex justify-between text-sm text-white/70">
-                      <span>{key}</span>
-                      <span>{value}</span>
-                    </div>
-                    <div className="h-3 rounded-full bg-white/10">
-                      <div className="h-full rounded-full bg-gradient-to-r from-pink-300 to-blue-300" style={{ width: `${Math.min(100, value * 25)}%` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </section>
-        )}
+      <button className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">
+        Stats
+      </button>
+    </div>
 
-        {tab === "Wellness" && (
-          <section className="mt-5 grid gap-5 lg:grid-cols-2">
-            <Card>
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <h2 className="text-2xl font-bold">Wellness</h2>
-                  <p className="mt-1 text-sm text-white/55">Track height, weight, BMI, hydration, steps, sleep, and daily progress.</p>
-                </div>
-                <button className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">Wellness</button>
-              </div>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <NumberField label="Height (cm)" value={selectedLog.height} onChange={(v) => updateSingleField("height", v)} min={120} max={220} />
-                <NumberField label="Weight (kg)" value={selectedLog.weight} onChange={(v) => updateSingleField("weight", v)} min={30} max={200} />
-                <NumberField label="Hydration goal (ml)" value={selectedLog.hydrationGoal} onChange={(v) => updateSingleField("hydrationGoal", v)} min={500} max={5000} />
-                <NumberField label="Hydration today (ml)" value={selectedLog.hydrationMl} onChange={(v) => updateSingleField("hydrationMl", v)} min={0} max={6000} />
-                <NumberField label="Steps" value={selectedLog.steps} onChange={(v) => updateSingleField("steps", v)} min={0} max={50000} />
-                <InfoPill label="Calories burned" value={`${estimatedCaloriesFromSteps} kcal`} />
-                <NumberField label="Sleep (hrs)" value={selectedLog.sleep} onChange={(v) => updateSingleField("sleep", v)} min={0} max={24} step="0.1" />
-              </div>
-            </Card>
+    <div className="mt-4 rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5">
+      <p className="text-xs uppercase tracking-[0.2em] text-white/45">Today</p>
+      <h3 className="mt-2 text-2xl font-semibold">
+        {selectedPhaseName === "Ovulation"
+          ? "You are likely in your ovulation phase 🌼"
+          : selectedChance.label === "High"
+          ? "You are likely in your fertile window 🌿"
+          : `You are in your ${selectedPhaseName.toLowerCase()} phase`}
+      </h3>
+      <p className="mt-2 text-sm text-white/60">
+        Cycle day {selectedCycleDay}. {statsData.ovulation}. {statsData.pregnancyChance}.
+      </p>
+    </div>
 
-            <Card>
-              <h2 className="text-2xl font-bold">Auto-detected progress</h2>
-              <div className="mt-4 grid gap-4">
-                <StatProgress label="BMI" value={`${bmi}`} progress={Math.min(100, (Number(bmi) / 35) * 100)} />
-                <StatProgress label="Hydration" value={`${selectedLog.hydrationMl} / ${selectedLog.hydrationGoal} ml`} progress={Math.min(100, (Number(selectedLog.hydrationMl) / Math.max(1, Number(selectedLog.hydrationGoal))) * 100)} />
-                <StatProgress label="Steps" value={`${selectedLog.steps} / 10000`} progress={Math.min(100, (Number(selectedLog.steps) / 10000) * 100)} />
-                <StatProgress label="Sleep" value={`${selectedLog.sleep} / 8 hrs`} progress={Math.min(100, (Number(selectedLog.sleep) / 8) * 100)} />
-              </div>
-            </Card>
-          </section>
+    <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2">
+      <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+        <p className="text-xs uppercase tracking-[0.2em] text-white/45">Cycle summary</p>
+        <div className="mt-3 space-y-3">
+          <div>
+            <p className="text-sm text-white/55">Day of cycle</p>
+            <p className="text-3xl font-bold">Day {selectedCycleDay}</p>
+          </div>
+          <div>
+            <p className="text-sm text-white/55">Phase</p>
+            <p className="text-lg font-semibold">{selectedPhaseName}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+        <p className="text-xs uppercase tracking-[0.2em] text-white/45">Fertility</p>
+        <div className="mt-3 space-y-3">
+          <div>
+            <p className="text-sm text-white/55">Status</p>
+            <p className="text-lg font-semibold">{statsData.fertility}</p>
+          </div>
+          <div>
+            <p className="text-sm text-white/55">Pregnancy chance</p>
+            <p className="text-lg font-semibold">{selectedChance.label}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+        <p className="text-xs uppercase tracking-[0.2em] text-white/45">Prediction</p>
+        <div className="mt-3 space-y-3">
+          <div>
+            <p className="text-sm text-white/55">Ovulation</p>
+            <p className="text-lg font-semibold">{statsData.ovulation}</p>
+          </div>
+          <div>
+            <p className="text-sm text-white/55">Symptom-based phase</p>
+            <p className="text-lg font-semibold">{inference.label}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+        <p className="text-xs uppercase tracking-[0.2em] text-white/45">Confidence</p>
+        <div className="mt-3 space-y-3">
+          <div>
+            <p className="text-sm text-white/55">Model confidence</p>
+            <p className="text-3xl font-bold">{inference.confidence}%</p>
+          </div>
+          <div>
+            <p className="text-sm text-white/55">Selected date</p>
+            <p className="text-lg font-semibold">{formatLong(selectedDate)}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
+      <InfoPill label="Menstrual" value={String(inference.scores.Menstrual || 0)} />
+      <InfoPill label="Follicular" value={String(inference.scores.Follicular || 0)} />
+      <InfoPill label="Ovulation" value={String(inference.scores.Ovulation || 0)} />
+      <InfoPill label="Luteal" value={String(inference.scores.Luteal || 0)} />
+      <InfoPill label="Pregnancy" value={String(inference.scores.Pregnancy || 0)} />
+    </div>
+
+    <p className="mt-4 text-sm text-white/45">
+      These insights are estimated from your cycle timing, symptoms, activities, and saved logs.
+    </p>
+  </Card>
+</section>
         )}
 
         {tab === "Fitness" && (
