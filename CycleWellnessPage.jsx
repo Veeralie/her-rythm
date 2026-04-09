@@ -714,33 +714,38 @@ function markPeriodEnd(date) {
             <div className="mt-4 rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
               <h2 className="text-xl font-bold">Cycle calendar</h2>
               <div className="mt-3 flex items-center justify-between gap-2">
-                <button
-                  onClick={() => goToToday()}
-                  className="rounded-xl bg-white/10 px-3 py-2 text-sm"
-                >
-                  Today
-                </button>
-              
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1))}
-                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-base"
-                  >
-                    ←
-                  </button>
-              
-                  <div className="rounded-2xl bg-white/5 px-4 py-2 text-base font-semibold">
-                    {monthLabel(viewDate)}
-                  </div>
-              
-                  <button
-                    onClick={() => setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1))}
-                    className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-base"
-                  >
-                    →
-                  </button>
-                </div>
-              </div>
+              <div className="mt-3 flex items-center justify-between gap-2">
+  <button
+    onClick={() => goToToday()}
+    className="rounded-xl bg-white/10 px-3 py-2 text-sm"
+  >
+    Today
+  </button>
+
+  <div className="flex items-center gap-2">
+    <button
+      onClick={() =>
+        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1))
+      }
+      className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm"
+    >
+      ←
+    </button>
+
+    <div className="rounded-2xl bg-white/5 px-4 py-2 text-base font-semibold">
+      {monthLabel(viewDate)}
+    </div>
+
+    <button
+      onClick={() =>
+        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1))
+      }
+      className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm"
+    >
+      →
+    </button>
+  </div>
+</div>
               
               <div className="mt-4 grid grid-cols-7 gap-2 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/40">
                 {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => <div key={day}>{day}</div>)}
