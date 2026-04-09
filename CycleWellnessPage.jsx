@@ -468,6 +468,22 @@ const lastPeriodDateObj = new Date(year, month - 1, day);
   const selectedChance = getPregnancyChance(selectedCycleDay, ovulationDay);
   const selectedLog = logs[dateKey(selectedDate)] || emptyLog();
   const inference = inferPhaseFromSymptoms(selectedLog.symptoms, selectedPhaseName);
+const phaseAccentMap = {
+  Menstrual: "from-rose-400/20 to-rose-300/5 border-rose-300/20",
+  Follicular: "from-emerald-400/20 to-emerald-300/5 border-emerald-300/20",
+  Ovulation: "from-amber-300/25 to-yellow-200/5 border-amber-200/20",
+  Luteal: "from-violet-400/20 to-fuchsia-300/5 border-violet-300/20",
+  Pregnancy: "from-sky-400/20 to-cyan-300/5 border-sky-300/20",
+};
+
+const phaseIconMap = {
+  Menstrual: "🌙",
+  Follicular: "🌱",
+  Ovulation: "🌼",
+  Luteal: "🌑",
+  Pregnancy: "✨",
+};
+
   const calendarDays = useMemo(() => buildCalendarDays(viewDate, lastPeriodDateObj, cycleLength, periodLength), [viewDate, lastPeriodDateObj, cycleLength, periodLength]);
 
   const learnedHistoryCount = useMemo(() => Object.values(logs).filter((entry) => entry?.periodStart).length, [logs]);
@@ -481,7 +497,17 @@ const lastPeriodDateObj = new Date(year, month - 1, day);
   const ovulationDate = addDays(nextPeriodStart, -(cycleLength - ovulationDay));
   const fertileStart = addDays(ovulationDate, -4);
   const fertileEnd = addDays(ovulationDate, 1);
+const selectedPhaseAccent =
+  phaseAccentMap[selectedPhaseName] || "from-white/10 to-white/5 border-white/10";
 
+const selectedPhaseIcon =
+  phaseIconMap[selectedPhaseName] || "✨";
+
+const daysUntilOvulation = diffDays(ovulationDate, selectedDate);
+
+const ovulationDateLabel = formatLong(ovulationDate);
+const fertileRangeLabel = `${formatShort(fertileStart)} – ${formatShort(fertileEnd)}`;
+const nextPeriodLabel = formatLong(nextPeriodStart);
   const estimatedCaloriesFromSteps = Math.round(Number(selectedLog.steps || 0) * 0.04);
 
   useEffect(() => {
