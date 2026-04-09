@@ -712,72 +712,100 @@ function markPeriodEnd(date) {
           </p>
           
             <div className="mt-4 rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
-              <h2 className="text-xl font-bold">Cycle calendar</h2>
-              <div className="mt-3 flex items-center justify-between gap-2">
-  <button
-    onClick={() => goToToday()}
-    className="rounded-xl bg-white/10 px-3 py-2 text-sm"
-  >
-    Today
-  </button>
+  <h2 className="text-xl font-bold">Cycle calendar</h2>
 
-  <div className="flex items-center gap-2">
+  <div className="mt-3 flex items-center justify-between gap-2">
     <button
-      onClick={() =>
-        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1))
-      }
-      className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm"
+      onClick={() => goToToday()}
+      className="rounded-xl bg-white/10 px-3 py-2 text-sm"
     >
-      ←
+      Today
     </button>
 
-    <div className="rounded-2xl bg-white/5 px-4 py-2 text-base font-semibold">
-      {monthLabel(viewDate)}
+    <div className="flex items-center gap-2">
+      <button
+        onClick={() =>
+          setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1))
+        }
+        className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm"
+      >
+        ←
+      </button>
+
+      <div className="rounded-2xl bg-white/5 px-4 py-2 text-base font-semibold">
+        {monthLabel(viewDate)}
+      </div>
+
+      <button
+        onClick={() =>
+          setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1))
+        }
+        className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm"
+      >
+        →
+      </button>
+    </div>
+  </div>
+
+  <div className="mt-4 grid grid-cols-7 gap-2 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/40">
+    {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+      <div key={day}>{day}</div>
+    ))}
+  </div>
+
+  <div className="mt-3 grid grid-cols-7 gap-2">
+    {calendarDays.map((item, index) => {
+      const base = item.muted
+        ? "bg-white/[0.03] text-white/35"
+        : phaseClasses[item.phase] || "bg-white/[0.03] text-white";
+
+      const fertile = item.fertile
+        ? "shadow-[0_0_0_1px_rgba(255,209,102,0.45)]"
+        : "";
+
+      const selected =
+        hasUserSelectedDate && dateKey(item.date) === dateKey(selectedDate)
+          ? "ring-2 ring-[#d3ae91] shadow-lg shadow-[#d3ae91]/20"
+          : "ring-1 ring-white/5";
+
+      const today = isSameDate(item.date, new Date());
+
+      const todayMarker = today
+        ? "after:absolute after:bottom-1.5 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full after:bg-white/90"
+        : "";
+
+      return (
+        <button
+          key={`${item.day}-${index}`}
+          onClick={() => openSelectedDate(item.date)}
+          className={`relative h-10 rounded-xl text-sm font-semibold transition hover:scale-[1.02] ${base} ${fertile} ${selected} ${todayMarker}`}
+        >
+          {item.day}
+
+          {item.ovulation && (
+            <span className="absolute top-1 right-1 text-[10px]">
+              🌼
+            </span>
+          )}
+        </button>
+      );
+    })}
+  </div>
+
+  {/* Legend */}
+  <div className="mt-3 flex items-center justify-center gap-4 text-xs text-white/60">
+    <div className="flex items-center gap-1">
+      <span className="h-1.5 w-1.5 rounded-full bg-white/90"></span>
+      <span>Today</span>
     </div>
 
-    <button
-      onClick={() =>
-        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1))
-      }
-      className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm"
-    >
-      →
-    </button>
+    <div className="flex items-center gap-1">
+      <span>🌼</span>
+      <span>Ovulation</span>
+    </div>
   </div>
 </div>
-              
-              <div className="mt-4 grid grid-cols-7 gap-2 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-white/40">
-                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => <div key={day}>{day}</div>)}
-              </div>
-              <div className="mt-3 grid grid-cols-7 gap-2">
-                {calendarDays.map((item, index) => {
-                  const base = item.muted ? "bg-white/[0.03] text-white/35" : phaseClasses[item.phase] || "bg-white/[0.03] text-white";
-const fertile = item.fertile ? "shadow-[0_0_0_1px_rgba(255,209,102,0.45)]" : "";
-const selected = hasUserSelectedDate && dateKey(item.date) === dateKey(selectedDate) ? "ring-2 ring-[#d3ae91] shadow-lg shadow-[#d3ae91]/20" : "ring-1 ring-white/5";
-const today = isSameDate(item.date, new Date());
-const todayMarker = today
-  ? "after:absolute after:bottom-1.5 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full after:bg-white/90"
-  : "";
-
-return (
-  <button
-    key={`${item.day}-${index}`}
-    onClick={() => openSelectedDate(item.date)}
-    className={`relative h-10 rounded-xl text-sm font-semibold transition hover:scale-[1.02] ${base} ${fertile} ${selected} ${todayMarker}`}
-  >
-    {item.day}
-
-    {item.ovulation && (
-    <span className="absolute top-1 right-1 text-[10px]">
-     🌼
-    </span>
-   )}
-  </button>
-);
-                })}
-              </div>
-            </div>
-           </div>
+        </div>
 
                 {hasUserSelectedDate && (
                   <section className="mt-5 rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 shadow-xl">
