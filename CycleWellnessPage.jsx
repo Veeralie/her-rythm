@@ -714,7 +714,6 @@ function markPeriodEnd(date) {
             <div className="mt-4 rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
               <h2 className="text-xl font-bold">Cycle calendar</h2>
               <div className="mt-3 flex items-center justify-between gap-2">
-              <div className="mt-3 flex items-center justify-between gap-2">
   <button
     onClick={() => goToToday()}
     className="rounded-xl bg-white/10 px-3 py-2 text-sm"
@@ -764,7 +763,7 @@ return (
   <button
     key={`${item.day}-${index}`}
     onClick={() => openSelectedDate(item.date)}
-    className={`relative h-10 rounded-xl text-sm font-semibold transition hover:scale-[1.02] ${base} ${fertile} ${ovulation} ${selected} ${todayMarker}`}
+    className={`relative h-10 rounded-xl text-sm font-semibold transition hover:scale-[1.02] ${base} ${fertile} ${selected} ${todayMarker}`}
   >
     {item.day}
 
