@@ -1000,29 +1000,105 @@ function markPeriodEnd(date) {
 
       <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
         <p className="text-xs uppercase tracking-[0.2em] text-white/45">Prediction</p>
+<section className="mt-5 grid gap-5">
+  <Card>
+    <div className="flex items-center justify-between gap-3">
+      <div>
+        <h2 className="text-2xl font-bold">Today’s Insight</h2>
+        <p className="mt-1 text-sm text-white/50">
+          What your cycle likely means right now
+        </p>
+      </div>
+
+      <button className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">
+        Today
+      </button>
+    </div>
+
+    <div
+      className={`mt-4 rounded-[1.75rem] border bg-gradient-to-br p-5 ${selectedPhaseAccent}`}
+    >
+      <p className="text-xs uppercase tracking-[0.2em] text-white/45">
+        Today
+      </p>
+
+      <div className="mt-2 flex items-start gap-3">
+        <span className="text-2xl">{selectedPhaseIcon}</span>
+
+        <div>
+          <h3 className="text-2xl font-semibold leading-snug">
+            You’re in your {selectedPhaseName.toLowerCase()} phase
+          </h3>
+
+          <p className="mt-2 text-sm text-white/70">
+            Day {selectedCycleDay} • {selectedChance.label} fertility
+            {daysUntilOvulation > 0 ? ` • Ovulation in ${daysUntilOvulation} days` : ""}
+            {daysUntilOvulation === 0 ? " • Ovulation is likely today" : ""}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2">
+      <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+        <p className="text-xs uppercase tracking-[0.2em] text-white/45">Cycle summary</p>
         <div className="mt-3 space-y-3">
           <div>
-            <p className="text-sm text-white/55">Ovulation</p>
-            <p className="text-lg font-semibold">{statsData.ovulation}</p>
+            <p className="text-sm text-white/55">Day of cycle</p>
+            <p className="text-3xl font-bold">Day {selectedCycleDay}</p>
           </div>
           <div>
-            <p className="text-sm text-white/55">Symptom-based phase</p>
-            <p className="text-lg font-semibold">{inference.label}</p>
+            <p className="text-sm text-white/55">Phase</p>
+            <p className="text-lg font-semibold">
+              {selectedPhaseIcon} {selectedPhaseName}
+            </p>
           </div>
         </div>
       </div>
 
       <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
-        <p className="text-xs uppercase tracking-[0.2em] text-white/45">Confidence</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-white/45">Fertility</p>
         <div className="mt-3 space-y-3">
           <div>
-            <p className="text-sm text-white/55">Model confidence</p>
-            <p className="text-3xl font-bold">{inference.confidence}%</p>
+            <p className="text-sm text-white/55">Status</p>
+            <p className="text-lg font-semibold">{statsData.fertility}</p>
           </div>
           <div>
-            <p className="text-sm text-white/55">Selected date</p>
-            <p className="text-lg font-semibold">{formatLong(selectedDate)}</p>
+            <p className="text-sm text-white/55">Pregnancy chance</p>
+            <p className="text-lg font-semibold">{selectedChance.label}</p>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="mt-5 rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <h2 className="text-2xl font-bold">Cycle Timeline</h2>
+          <p className="mt-1 text-sm text-white/50">
+            Plan ahead based on your cycle
+          </p>
+        </div>
+
+        <button className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">
+          Timeline
+        </button>
+      </div>
+
+      <div className="mt-4 space-y-3">
+        <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+          <p className="text-sm text-white/55">Predicted ovulation</p>
+          <p className="mt-2 text-2xl font-bold">{ovulationDateLabel}</p>
+        </div>
+
+        <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+          <p className="text-sm text-white/55">Fertile window</p>
+          <p className="mt-2 text-2xl font-bold">{fertileRangeLabel}</p>
+        </div>
+
+        <div className="rounded-3xl bg-white/5 p-4 ring-1 ring-white/10">
+          <p className="text-sm text-white/55">Next period</p>
+          <p className="mt-2 text-2xl font-bold">{nextPeriodLabel}</p>
         </div>
       </div>
     </div>
