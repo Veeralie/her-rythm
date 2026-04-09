@@ -783,7 +783,7 @@ function markPeriodEnd(date) {
           {item.day}
 
           {item.ovulation && (
-            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px]">
+            <span className="absolute bottom-1.5 left-1/2 h-1.5 w-1.5 -translate-x-1/2 text-[10px] opacity-70 flex items-center justify-center">
               🌼
             </span>
           )}
